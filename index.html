@@ -6,22 +6,91 @@
   <title>Under Construction</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      margin-top: 20%;
+      background-color: #f4f4f4;
+      color: #2e7d32; /* A green color to give an eco-friendly feel */
+      padding: 50px;
+      margin: 0;
     }
     h1 {
       font-size: 3em;
-      color: #333;
+      color: #2e7d32;
     }
     p {
       font-size: 1.5em;
-      color: #777;
+      color: #666;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input[type="email"] {
+      padding: 10px;
+      font-size: 1em;
+      width: 300px;
+      max-width: 80%;
+      margin-right: 10px;
+      border: 1px solid #2e7d32;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background-color: #2e7d32;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #1b5e20;
+    }
+    .logo {
+      width: 200px;
+      margin: 20px auto;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
     }
   </style>
 </head>
 <body>
-  <h1>Website Under Construction</h1>
-  <p>We're working hard to bring you a new experience. Stay tuned!</p>
+  <div class="container">
+    <div class="logo">
+      <img src="https://logomakr.com/media/uploads/20210922/9xCZpl.png" alt="Logo" width="200">
+    </div>
+    <h1>We're Coming Soon!</h1>
+    <p>Our store is under construction. We are working hard to bring you the best low tox products.</p>
+    <p>Stay informed about our launch. Enter your email below to be notified:</p>
+    <form id="emailForm">
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="submit" value="Notify Me">
+    </form>
+    <p id="responseMessage"></p>
+  </div>
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('email').value;
+      fetch('https://your-firebase-function-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('responseMessage').innerText = data.message;
+      })
+      .catch(error => {
+        document.getElementById('responseMessage').innerText = 'An error occurred. Please try again later.';
+      });
+    });
+  </script>
 </body>
 </html>
